@@ -23,11 +23,14 @@ function operate(num1, num2, operation)
 
 function assignOperator(operation)
 {
-    if (operator !== null)
+    operating = true;
+
+    if (operator !== null && +display.textContent !== num1)
     {
         saveNum();
         displayAnswer(operate(num1, num2, operator));
         clearAllData();
+        operating = true;
     }
 
     switch(operation.id)
@@ -57,13 +60,18 @@ function doCommand(command)
     {
         case "clear-button":
             clearAllData();
-            clearDisplay();
+            display.textContent = 0;
             break;
         case "backspace-button":
+            deleteDigit(display.textContent);
             break;
         case "decimal-button":
             break;
         case "equals-button":
+            if (isInitialState() || operator === null)
+            {
+                return;
+            }
             saveNum();
             if (num1 && num2 && operator)
             {
@@ -71,6 +79,19 @@ function doCommand(command)
                 clearAllData();
             }
             break;
+    }
+}
+
+function isInitialState()
+{
+    return num1 === null && num2 === null & operator === null && operating === false && +display.textContent === 0;
+}
+
+function deleteDigit(num)
+{
+    if (num.length > 1)
+    {
+        display.textContent = num.substring(0, num.length - 1);
     }
 }
 
@@ -84,24 +105,23 @@ function saveNum()
     {
         num2 = +display.textContent;
     }
-
-    console.log(`num1 is a ${typeof num1} and its value is ${num1}`)
-    console.log(`num2 is a ${typeof num2} and its value is ${num2}`)
+    if (operating === false && num1 === null && operator === null)
+    {
+        clearDisplay();
+    }
+    console.log(`num1 is a ${typeof num1} and its value is ${num1}`);
+    console.log(`num2 is a ${typeof num2} and its value is ${num2}\n`);
 }
 
 function clearDisplay()
 {
-    console.log(`num1 is a ${typeof num1} and its value is ${num1}`)
-    console.log(`num2 is a ${typeof num2} and its value is ${num2}`)
-    if (operator !== null)
-    {
-        display.textContent = null;
-    }
+    display.textContent = null;
 }
 
 function displayAnswer(result)
 {
     display.textContent = result;
+    operating = false;
 }
 
 function clearAllData()
@@ -114,6 +134,7 @@ function clearAllData()
 let num1 = null;
 let num2 = null;
 let operator = null;
+let operating = false;
 
 const display = document.querySelector("#calculator-display");
 const buttonsContainer = document.querySelector("#calculator-buttons-container");
@@ -124,8 +145,19 @@ buttonsContainer.addEventListener("click", (event) => {
     switch(target.className)
     {
         case "digit":
-            clearDisplay();
-            display.textContent += target.textContent;
+            if (operating === true)
+            {
+                clearDisplay();
+            }
+
+            if(+display.textContent === 0)
+            {
+                display.textContent = +display.textContent + +target.textContent;
+            }
+            else
+            {
+                display.textContent += target.textContent;
+            }
             break;
         case "operator":
             assignOperator(target);

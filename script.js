@@ -113,6 +113,10 @@ function clearDisplay()
 
 function displayAnswer(result)
 {
+    if (result && !Number.isInteger(result))
+    {
+        result = +result.toFixed(3);
+    }
     display.textContent = result;
     operating = false;
 }

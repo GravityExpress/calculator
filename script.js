@@ -23,14 +23,11 @@ function operate(num1, num2, operation)
 
 function assignOperator(operation)
 {
-    operating = true;
-
     if (operator !== null && +display.textContent !== num1)
     {
         saveNum();
         displayAnswer(operate(num1, num2, operator));
         clearAllData();
-        operating = true;
     }
 
     switch(operation.id)
@@ -84,7 +81,7 @@ function doCommand(command)
 
 function isInitialState()
 {
-    return num1 === null && num2 === null & operator === null && operating === false && +display.textContent === 0;
+    return num1 === null && num2 === null & operator === null && +display.textContent === 0;
 }
 
 function deleteDigit(num)
@@ -104,10 +101,6 @@ function saveNum()
     else
     {
         num2 = +display.textContent;
-    }
-    if (operating === false && num1 === null && operator === null)
-    {
-        clearDisplay();
     }
     console.log(`num1 is a ${typeof num1} and its value is ${num1}`);
     console.log(`num2 is a ${typeof num2} and its value is ${num2}\n`);
@@ -134,7 +127,6 @@ function clearAllData()
 let num1 = null;
 let num2 = null;
 let operator = null;
-let operating = false;
 
 const display = document.querySelector("#calculator-display");
 const buttonsContainer = document.querySelector("#calculator-buttons-container");
@@ -145,9 +137,10 @@ buttonsContainer.addEventListener("click", (event) => {
     switch(target.className)
     {
         case "digit":
-            if (operating === true)
+            if (num1 !== null && operator !== null && num2 === null)
             {
                 clearDisplay();
+                saveNum();
             }
 
             if(+display.textContent === 0)

@@ -23,30 +23,29 @@ function operate(num1, num2, operation)
 
 function assignOperator(operation)
 {
+    
     if (operator !== null && +display.textContent !== num1)
     {
         saveNum();
         displayAnswer(operate(num1, num2, operator));
         clearAllData();
     }
+    
+    saveNum();
 
     switch(operation.id)
     {
         case "add-button":
             operator = "+";
-            saveNum();
             break;
         case "subtract-button":
             operator = "-";
-            saveNum();
             break;
         case "divide-button":
             operator = "/";
-            saveNum();
             break;
         case "multiply-button":
             operator = "*";
-            saveNum();
             break;
     }
 }

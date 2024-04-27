@@ -63,6 +63,23 @@ function doCommand(command)
             deleteDigit(display.textContent);
             break;
         case "decimal-button":
+            if (num1 !== null && operator !== null && num2 === null)
+            {
+                clearDisplay();
+                saveNum();
+            }
+
+            if (!display.textContent.includes("."))
+            {
+                if (display.textContent.length === 0)
+                {
+                    display.textContent += "0.";
+                }
+                else
+                {
+                    display.textContent += ".";
+                }
+            }
             break;
         case "equals-button":
             if (isInitialState() || operator === null)
@@ -118,7 +135,6 @@ function displayAnswer(result)
         result = +result.toFixed(3);
     }
     display.textContent = result;
-    operating = false;
 }
 
 function clearAllData()
@@ -152,7 +168,7 @@ buttonsContainer.addEventListener("click", (event) => {
                 saveNum();
             }
 
-            if(+display.textContent === 0)
+            if(display.textContent === "0")
             {
                 display.textContent = +display.textContent + +target.textContent;
             }

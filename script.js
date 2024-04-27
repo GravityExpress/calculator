@@ -106,6 +106,7 @@ function deleteDigit(num)
     {
         display.textContent = num.substring(0, num.length - 1);
     }
+    num1 = +display.textContent;
 }
 
 function saveNum()

@@ -137,6 +137,11 @@ buttonsContainer.addEventListener("click", (event) => {
     switch(target.className)
     {
         case "digit":
+            if (display.textContent.length === 10)
+            {
+                return;
+            }
+
             if (num1 !== null && operator !== null && num2 === null)
             {
                 clearDisplay();

@@ -3,6 +3,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+
+.calculator, .calculator *:not(#calculator-buttons-container, #calculator-buttons-container *){
+    outline: solid;
+    outline-width: 1px;
 }
 
 #calculator-body {
@@ -15,15 +21,27 @@ body {
     flex: 0 0 auto;
     flex-wrap: wrap;
     gap: 5%;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     border-radius: 15px;
+    overflow:hidden
+}
+
+#calculator-display-body {
+    width: 100%;
+    background-color: aliceblue;
+
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 20%;
+    align-items: center;
+    justify-content: center;
 }
 
 #calculator-display {
     width: 75%;
-    background-color: rgb(237, 242, 248);
+    background-color: rgb(133, 180, 162);
 
     display: flex;
     flex: 0 0 10%;
@@ -37,7 +55,6 @@ body {
 
 #calculator-buttons-container {
     width: 78%;
-    /* background-color: black; */
 
     display: flex;
     flex-wrap: wrap;
@@ -49,6 +66,12 @@ body {
 button {
     flex: 0 1 24%;
     height: 19%;
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+button:hover {
+    background-color: white;
 }
 
 #clear-button {

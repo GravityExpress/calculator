@@ -23,15 +23,22 @@ function operate(num1, num2, operation)
 
 function assignOperator(operation)
 {
-    
-    if (operator !== null && +display.textContent !== num1)
+    if (operator === operation.textContent)
+    {
+        return;
+    }
+
+    if (num1 !== null && operator !== null && num2 !== null)
     {
         saveNum();
         displayAnswer(operate(num1, num2, operator));
         clearAllData();
     }
-    
-    saveNum();
+
+    if (num1 === null && operator === null)
+    {
+        saveNum();
+    }
 
     switch(operation.id)
     {
@@ -86,7 +93,7 @@ function doCommand(command)
                 return;
             }
             saveNum();
-            if (num1 && num2 && operator)
+            if (num1 !== null && num2 !== null && operator !== null)
             {
                 displayAnswer(operate(num1, num2, operator));
                 clearAllData();
@@ -102,6 +109,11 @@ function isInitialState()
 
 function deleteDigit(num)
 {
+    if (operator !== null && num2 === null)
+    {
+        return;
+    }
+
     if (num.length > 1)
     {
         display.textContent = num.substring(0, num.length - 1);
@@ -115,7 +127,14 @@ function deleteDigit(num)
     {
         return;
     }
-    num1 = +display.textContent;
+    if (num1 !== null && num2 !== null)
+    {
+        saveNum();
+    }
+    else
+    {
+        num1 = +display.textContent;
+    }
 }
 
 function saveNum()
@@ -184,6 +203,11 @@ buttonsContainer.addEventListener("click", (event) => {
             else
             {
                 display.textContent += target.textContent;
+            }
+
+            if (num2 !== null)
+            {
+                saveNum();
             }
             break;
         case "operator":

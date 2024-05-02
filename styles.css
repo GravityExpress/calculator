@@ -6,7 +6,7 @@ body {
     flex-direction: column;
 }
 
-.calculator, .calculator *:not(#calculator-buttons-container, #calculator-buttons-container *){
+.calculator, .calculator *:not(#calculator-buttons-container, #calculator-buttons-container *, #calculator-display-input, #calculator-display-ongoing){
     outline: solid;
     outline-width: 1px;
 }
@@ -39,18 +39,26 @@ body {
     justify-content: center;
 }
 
-#calculator-display {
+#calculator-display-container {
     width: 75%;
     background-color: rgb(133, 180, 162);
 
     display: flex;
     flex: 0 0 10%;
-    align-items: center;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
 
     padding-right: 3%;
 
     font-size: 2em;
+}
+
+#calculator-display-ongoing {
+    align-self: flex-start;
+
+    font-size: 0.5em;
+
+    padding-left: 3%;
 }
 
 #calculator-buttons-container {

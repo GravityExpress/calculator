@@ -55,6 +55,7 @@ function assignOperator(operation)
             operator = "*";
             break;
     }
+    displayCurrentOperation();
 }
 
 function doCommand(command)
@@ -135,6 +136,7 @@ function deleteDigit(num)
     {
         num1 = +display.textContent;
     }
+    displayCurrentOperation();
 }
 
 function saveNum()
@@ -165,19 +167,33 @@ function displayAnswer(result)
     display.textContent = result;
 }
 
+function displayCurrentOperation()
+{
+    if (num2 !== null)
+    {
+        operationsDisplay.textContent = `${num1} ${operator} ${num2}`;
+    }
+    else
+    {
+        operationsDisplay.textContent = `${num1} ${operator}`;
+    }
+}
+
 function clearAllData()
 {
     num1 = null;
     num2 = null;
     operator = null;
+    operationsDisplay.textContent = "\u00A0";
 }
 
 let num1 = null;
 let num2 = null;
 let operator = null;
 
-const display = document.querySelector("#calculator-display");
+const display = document.querySelector("#calculator-display-input");
 const buttonsContainer = document.querySelector("#calculator-buttons-container");
+const operationsDisplay = document.querySelector("#calculator-display-ongoing");
 
 buttonsContainer.addEventListener("click", (event) => {
     let target = event.target;
@@ -208,6 +224,7 @@ buttonsContainer.addEventListener("click", (event) => {
             if (num2 !== null)
             {
                 saveNum();
+                displayCurrentOperation();
             }
             break;
         case "operator":

@@ -179,7 +179,7 @@ function displayAnswer(result)
 
     if (result && !Number.isInteger(result))
     {
-        result = +result.toFixed(3);
+        result = Number(result).toFixed(3);
     }
     display.textContent = result;
 }
@@ -240,7 +240,7 @@ buttonsContainer.addEventListener("click", (event) => {
                 return;
             }        
 
-            if (isPassDigitLimit())
+            if (isPassDigitLimit() && !(num1 !== null && operator !== null && num2 === null))
             {
                 return;
             }

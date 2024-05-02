@@ -160,8 +160,8 @@ function saveNum()
     {
         num2 = +display.textContent;
     }
-    console.log(`num1 is a ${typeof num1} and its value is ${num1}`);
-    console.log(`num2 is a ${typeof num2} and its value is ${num2}\n`);
+    // console.log(`num1 is a ${typeof num1} and its value is ${num1}`);
+    // console.log(`num2 is a ${typeof num2} and its value is ${num2}\n`);
 }
 
 function clearDisplay()
@@ -181,7 +181,7 @@ function displayAnswer(result)
     {
         result = +result.toFixed(3);
     }
-    
+
     if (result.toString().length > 10)
     {
         display.textContent = setPrecision(+result);
@@ -344,5 +344,5 @@ document.addEventListener("keydown", (event) => {
             allButtons[17].click();
             break;
     }
-    console.log(event.key);
+    // console.log(event.key);
 }, false);

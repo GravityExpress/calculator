@@ -195,6 +195,8 @@ const display = document.querySelector("#calculator-display-input");
 const buttonsContainer = document.querySelector("#calculator-buttons-container");
 const operationsDisplay = document.querySelector("#calculator-display-ongoing");
 
+const allButtons = buttonsContainer.children;
+
 buttonsContainer.addEventListener("click", (event) => {
     let target = event.target;
 
@@ -235,3 +237,64 @@ buttonsContainer.addEventListener("click", (event) => {
             break;
     }
 });
+
+document.addEventListener("keydown", (event) => {
+    switch(event.key)
+    {
+        case "Escape":
+            allButtons[0].click();
+            break;
+        case "Backspace":
+            allButtons[1].click();
+            break;
+        case "+":
+            allButtons[2].click();
+            break;
+        case "1":
+            allButtons[3].click();
+            break;
+        case "2":
+            allButtons[4].click();
+            break;
+        case "3":
+            allButtons[5].click();
+            break;
+        case "-":
+            allButtons[6].click();
+            break;
+        case "4":
+            allButtons[7].click();
+            break;
+        case "5":
+            allButtons[8].click();
+            break;
+        case "6":
+            allButtons[9].click();
+            break;
+        case "/":
+            allButtons[10].click();
+            break;
+        case "7":
+            allButtons[11].click();
+            break;
+        case "8":
+            allButtons[12].click();
+            break;
+        case "9":
+            allButtons[13].click();
+            break;
+        case "*":
+            allButtons[14].click();
+            break;
+        case ".":
+            allButtons[15].click();
+            break;
+        case "0":
+            allButtons[16].click();
+            break;
+        case "Enter":
+            allButtons[17].click();
+            break;
+    }
+    console.log(event.key);
+}, false);

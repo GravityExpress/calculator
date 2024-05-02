@@ -82,7 +82,7 @@ function doCommand(command)
                 saveNum();
             }
 
-            if (!display.textContent.includes("."))
+            if (!display.textContent.includes(".") && !isPassDigitLimit())
             {
                 if (display.textContent.length === 0)
                 {
@@ -214,6 +214,11 @@ function clearAllData()
     operationsDisplay.textContent = "\u00A0";
 }
 
+function isPassDigitLimit()
+{
+    return display.textContent.length === 10;
+}
+
 let num1 = null;
 let num2 = null;
 let operator = null;
@@ -235,7 +240,7 @@ buttonsContainer.addEventListener("click", (event) => {
                 return;
             }        
 
-            if (display.textContent.length === 10)
+            if (isPassDigitLimit())
             {
                 return;
             }

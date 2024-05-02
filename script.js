@@ -4,7 +4,13 @@ const subtract = (num1, num2) => num1 - num2;
 
 const multiply = (num1, num2) => num1 * num2;
 
-const divide = (num1, num2) => num1 / num2;
+const divide = (num1, num2) => {
+    if (num2 === 0)
+    {
+        return "Error";
+    }
+    return num1 / num2;
+};
 
 function operate(num1, num2, operation)
 {
@@ -110,6 +116,11 @@ function isInitialState()
 
 function deleteDigit(num)
 {
+    if (clearDivideByZeroError())
+    {
+        return;
+    }
+
     if (operator !== null && num2 === null)
     {
         return;
@@ -160,6 +171,12 @@ function clearDisplay()
 
 function displayAnswer(result)
 {
+    if (isNaN(result))
+    {
+        display.textContent = result;
+        return;
+    }
+
     if (result && !Number.isInteger(result))
     {
         result = +result.toFixed(3);
@@ -176,6 +193,16 @@ function displayCurrentOperation()
     else
     {
         operationsDisplay.textContent = `${num1} ${operator}`;
+    }
+}
+
+function clearDivideByZeroError()
+{
+    if (isNaN(display.textContent))
+    {
+        clearAllData();
+        display.textContent = 0;
+        return true;
     }
 }
 
@@ -203,6 +230,11 @@ buttonsContainer.addEventListener("click", (event) => {
     switch(target.className)
     {
         case "digit":
+            if (clearDivideByZeroError())
+            {
+                return;
+            }        
+
             if (display.textContent.length === 10)
             {
                 return;

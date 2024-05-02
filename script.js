@@ -181,7 +181,18 @@ function displayAnswer(result)
     {
         result = +result.toFixed(3);
     }
+    
+    if (result.toString().length > 10)
+    {
+        display.textContent = setPrecision(+result);
+        return;
+    }
     display.textContent = result;
+}
+
+function setPrecision(num)
+{
+    return num.toPrecision(10);
 }
 
 function displayCurrentOperation()

@@ -179,7 +179,7 @@ function displayAnswer(result)
 
     if (result && !Number.isInteger(result))
     {
-        result = Number(result).toFixed(3);
+        result = +result.toFixed(3);
     }
     display.textContent = result;
 }
